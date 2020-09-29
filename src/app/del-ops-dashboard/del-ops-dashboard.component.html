@@ -1,0 +1,20 @@
+<head>
+  <link rel="stylesheet" href="https://unpkg.com/@ag-grid-community/all-modules@23.0.0/dist/styles/ag-grid.css" />
+  <link rel="stylesheet" href="https://unpkg.com/@ag-grid-community/all-modules@23.0.0/dist/styles/ag-theme-alpine.css" />
+</head>
+<br>
+<div class="ag-theme-alpine" style="padding-left:2%;">
+  <ag-grid-angular
+      style="width: 95%; height: 500px;"
+      [columnDefs]="columnDefs"
+      [editType]="editType"
+      [stopEditingWhenGridLosesFocus]="true"
+      (gridReady)="OnGridReady($event)"
+      (rowValueChanged)="OnRowValueChanged($event)"
+      (rowDoubleClicked)="OnRowDoubleClicked($event)">
+  </ag-grid-angular>
+</div>
+<div style="padding-right: 5%; padding-top: 1%;">
+  <button type="button" name="button" class="btn btn-primary btn-sm float-right" (click)="OnSaveChanges()">Save changes</button>
+  <button type="button" name="button" class="btn btn-primary btn-sm float-right" style="margin-right: 1%;">Upload Data</button>
+</div>
