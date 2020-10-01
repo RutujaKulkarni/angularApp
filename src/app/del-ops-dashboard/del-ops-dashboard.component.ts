@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { MatDialog, MatDialogConfig } from "@angular/material";
+import { NumericEditor } from '../numeric-editor.component';
+
 @Component({
   selector: 'app-del-ops-dashboard',
   templateUrl: './del-ops-dashboard.component.html',
@@ -15,39 +17,58 @@ export class DelOpsDashboardComponent {
   private columnDefs;
   private editedRowData: JSON;
   private newData: any;
+  saveData: boolean = false;
+  private frameworkComponents;
+  private defaultColDef;
 
   constructor(private http: HttpClient) {
+
+    this.frameworkComponents = {
+      numericEditor: NumericEditor
+    };
+    this.defaultColDef = {
+      editable: true,
+      sortable: true,
+      flex: 0,
+      minWidth: 110,
+      filter: true,
+      resizable: true,
+    };
+
+    this.saveData = false;
     this.columnDefs = [
-      { headerName: `Project Code`, field: `projectCode`, sortable: true }, //project master model
-      { headerName: `Project Name`, field: `projectName`, sortable: true }, //project master model -> velocity code
-      { headerName: `Project Health`, field: `projectHealth`, sortable: true, editable: true }, //project leading model
-      { headerName: `Onsite FTE Count`, field: `onsiteFteCount`, sortable: true, editable: true }, // ?
-      { headerName: `Offshore FTE Count`, field: `offshoreFteCount`, sortable: true, editable: true }, // ?
-      { headerName: `Past Due RRs`, field: `pastDueRrs`, sortable: true, editable: true }, //project leading model
-      { headerName: `Ageing of Past Due RRs`, field: `ageingOfPastDueRrs`, sortable: true, editable: true }, //project leading model
-      { headerName: `Resource Onboarding Delays`, field: `resourceOnboardingDelays`, sortable: true, editable: true }, //project leading model
-      { headerName: `EIQ Baselining of resources`, field: `eiqBaseliningOfResources`, sortable: true, editable: true }, //project leading model
-      { headerName: `Attrition Count`, field: `attritionCount`, sortable: true, editable: true }, //project leading model
-      { headerName: `Q2 Revenue`, field: `revenue`, sortable: true, editable: true }, //project leading model
-      { headerName: `Q2 Cost`, field: `cost`, sortable: true, editable: true }, //project leading model
-      { headerName: `Q2 Margin`, field: `margin`, sortable: true, editable: true }, //project leading model
+      { headerName: `Chorus Code`, field: `projectCode`, sortable: true, editable: false, width:140 }, //project master model
+      { headerName: 'Velocity Project Code', field: `velocityProjectCode`, sortable: true, editable: false, width: 190},
+      { headerName: `Project Name`, field: `projectName`, sortable: true, editable: false, width:140 }, //project master model -> velocity code
+      { headerName: `Project Health`, field: `projectHealth`, sortable: true, editable: true, width:150 }, //project leading model
+      { headerName: `Onsite FTE Count`, field: `onsiteFteCount`, sortable: true, editable: true, cellEditor: 'numericEditor', width:180}, // ?
+      { headerName: `Offshore FTE Count`, field: `offshoreFteCount`, sortable: true, editable: true, cellEditor: 'numericEditor', width:180 }, // ?
+      { headerName: `Past Due RRs`, field: `pastDueRrs`, sortable: true, editable: true,cellEditor: 'numericEditor', width:140 }, //project leading model
+      { headerName: `Ageing of Past Due RRs`, field: `ageingOfPastDueRrs`, sortable: true, editable: true, cellEditor: 'numericEditor', width:190 }, //project leading model
+      { headerName: `Resource Onboarding Delays`, field: `resourceOnboardingDelay`, sortable: true, editable: true, cellEditor: 'numericEditor', width:200 }, //project leading model
+      { headerName: `EIQ Baselining of resources`, field: `eiqBaseliningOfResources`, sortable: true, editable: true, width:200 }, //project leading model
+      { headerName: `Attrition Count`, field: `attritionCount`, sortable: true, editable: true, cellEditor: 'numericEditor', width:180 }, //project leading model
+      { headerName: `Q2 Revenue (Million)`, field: `revenue`, sortable: true, editable: true, cellEditor: 'numericEditor', width:180 }, //project leading model
+      { headerName: `Q2 Cost (Million)`, field: `cost`, sortable: true, editable: true, cellEditor: 'numericEditor', width:170 }, //project leading model
+      { headerName: `Q2 Margin %`, field: `margin`, sortable: true, editable: true, cellEditor: 'numericEditor', width:140 }, //project leading model
     ];
     this.editType = 'fullRow';
   }
 
   OnGridReady(params) {
+    this.saveData = true;
     this.gridApi = params.api;
     this.columnApi = params.columnApi;
     this.http.get('http://localhost:8002/api/citi-portal/dev-ops/details').subscribe(data => {//perform the async call
       this.newData = data;
-      //console.log(this.newData);
+      console.log(this.newData);
       this.gridApi.setColumnDefs(this.columnDefs);
       this.gridApi.setRowData(this.newData);
     });
   }
 
   OnRowValueChanged(params) {
-    console.log(params);
+    this.saveData = false;
     this.editedRowData = params.data;
   }
 
@@ -60,22 +81,21 @@ export class DelOpsDashboardComponent {
     this.http.put('http://localhost:8002/api/citi-portal/updateDetails', this.editedRowData, httpOptions).subscribe(
       val => {
         console.log("PUT call successful value returned in body", val);
-        this.saveData = false;
       },
       response => {
         console.log("PUT call in error", response);
-        this.saveData = false;
       },
       () => {
         console.log("The PUT observable is now completed.");
-        this.saveData = false;
+        this.saveData = true;
+        this.gridApi.refreshCells();
         this.gridApi.setRowData(this.newData);
       }
     );
   }
 
   OnRowDoubleClicked(params) {
-    //this.saveData = true;
+    this.saveData = false;
   }
 
 }

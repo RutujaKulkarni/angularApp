@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { MatDialog, MatDialogConfig } from "@angular/material";
+import { NumericEditor } from '../numeric-editor.component';
+import { EmailEditor } from '../email-editor.component';
 
 @Component({
   selector: 'app-sow-dashboard',
@@ -17,8 +19,22 @@ export class SowDashboardComponent {
   private editedRowData: JSON;
   private newData: any;
   saveData: boolean = false;
+  private frameworkComponents;
+  private defaultColDef;
 
   constructor(private http: HttpClient, private dialog: MatDialog) {
+    this.frameworkComponents = {
+      numericEditor: NumericEditor,
+      emailEditor: EmailEditor
+    };
+    this.defaultColDef = {
+      editable: true,
+      sortable: true,
+      flex: 0,
+      minWidth: 110,
+      filter: true,
+      resizable: true,
+    };
     this.saveData = false;
     this.columnDefs = [
       { headerName: `SOW ID`, field: `sowId`, sortable: true },
@@ -29,8 +45,8 @@ export class SowDashboardComponent {
       { headerName: `Status`, field: `status`, sortable: true, editable: true },
       { headerName: `Citi Legal Entity`, field: `citiLegalEntity`, sortable: true },
       { headerName: `Signed Effective Date`, field: `signedEffectiveDate`, sortable: true },
-      { headerName: `Commencement Date`, field: `commencementDate`, sortable: true },
-      { headerName: `Expiry Date`, field: `expiryDate`, sortable: true, editable: true },
+      { headerName: `Commencement Date`, field: `commencementDate`, sortable: true  },
+      { headerName: `Expiry Date`, field: `expiryDate`, sortable: true, editable: true},
       { headerName: `Geography`, field: `geography`, sortable: true },
       { headerName: `Sector`, field: `sector`, sortable: true },
       { headerName: `Sow Executing Location`, field: `sowExecutingLocation`, sortable: true, editable: true },
@@ -47,7 +63,7 @@ export class SowDashboardComponent {
       { headerName: `Virtusa PD Email Id`, field: `virtusaPDEmailId`, sortable: true, editable: true },
       { headerName: `Virtusa PM Name`, field: `virtusaPMName`, sortable: true, editable: true },
       { headerName: `Virtusa PM EmailId`, field: `virtusaPMEmailId`, sortable: true, editable: true },
-      { headerName: `Tenure`, field: `tenure`, sortable: true },
+      { headerName: `Tenure`, field: `tenure`, sortable: true, cellEditor: 'numericEditor' },
     ];
     this.editType = 'fullRow';
   }
@@ -58,7 +74,6 @@ export class SowDashboardComponent {
     this.columnApi = params.columnApi;
     this.http.get('http://localhost:8000/api/citi-portal/getDetails').subscribe(data => {//perform the async call
       this.newData = data;
-      //console.log(this.newData);
       this.gridApi.setColumnDefs(this.columnDefs);
       this.gridApi.setRowData(this.newData);
     });
@@ -66,18 +81,6 @@ export class SowDashboardComponent {
 
   OnRowValueChanged(params) {
     console.log(params);
-    //     if(this.editedRowData != null){
-    //       console.log("........ previous editedRowData");
-    //       console.log(this.editedRowData);
-    //       console.log("........ now params.data");
-    //       console.log(params.data);
-    //       //this.editedRowData = this.editedRowData.concat(params.data);
-    // //      jsonArray1 = jsonArray1.concat(jsonArray2);
-    //     }else{
-    //       this.editedRowData = params.data;
-    //     }
-    //  console.log(this.editedRowData);
-    //this.editedRowData.put(params.data);
     this.editedRowData = params.data;
     this.saveData = false;
   }
@@ -110,22 +113,4 @@ export class SowDashboardComponent {
       }
     );
   }
-
-  // openMyDialog() {
-  //       const dialogConfig = new MatDialogConfig();
-  //       dialogConfig.disableClose = true;
-  //       dialogConfig.autoFocus = true;
-  //       dialogConfig.data = {
-  //         id: 1,
-  //         title: 'Success'
-  //       };
-  //       this.dialog.open(dialogConfig);
-  //   }
-
 }
-
-//scenario 1: Same row is edited twice before sending data. Check if any error occures
-/*TODO:
-1. When one row is made editable, user can not edit another row before saving or canceling the changes.
-
-*/
