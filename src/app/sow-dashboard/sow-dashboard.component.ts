@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { MatDialog, MatDialogConfig } from "@angular/material";
-import { NumericEditor } from '../numeric-editor.component';
-import { EmailEditor } from '../email-editor.component';
+//import { NumericEditor } from '../numeric-editor.component';
 
 @Component({
   selector: 'app-sow-dashboard',
@@ -24,8 +23,7 @@ export class SowDashboardComponent {
 
   constructor(private http: HttpClient, private dialog: MatDialog) {
     this.frameworkComponents = {
-      numericEditor: NumericEditor,
-      emailEditor: EmailEditor
+      //numericEditor: NumericEditor
     };
     this.defaultColDef = {
       editable: true,
@@ -63,7 +61,7 @@ export class SowDashboardComponent {
       { headerName: `Virtusa PD Email Id`, field: `virtusaPDEmailId`, sortable: true, editable: true },
       { headerName: `Virtusa PM Name`, field: `virtusaPMName`, sortable: true, editable: true },
       { headerName: `Virtusa PM EmailId`, field: `virtusaPMEmailId`, sortable: true, editable: true },
-      { headerName: `Tenure`, field: `tenure`, sortable: true, cellEditor: 'numericEditor' },
+      { headerName: `Tenure`, field: `tenure`, sortable: true },
     ];
     this.editType = 'fullRow';
   }
@@ -88,6 +86,7 @@ export class SowDashboardComponent {
   OnRowDoubleClicked(params) {
     this.saveData = true;
   }
+
 
   OnSaveChanges() {
     const httpOptions = {

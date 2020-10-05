@@ -14,26 +14,23 @@ import { SowDashboardComponent } from './sow-dashboard/sow-dashboard.component';
 import { DelOpsDashboardComponent } from './del-ops-dashboard/del-ops-dashboard.component';
 import { SowUploadComponent } from './sow-upload/sow-upload.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NumericEditor } from './numeric-editor.component';
-import { DateEditor} from './date-component.component';
-import { EmailEditor } from './email-editor.component';
+//import { NumericEditor } from './numeric-editor.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     SowDashboardComponent,
     DelOpsDashboardComponent,
-    SowUploadComponent,
-    NumericEditor,
-    DateEditor,
-    EmailEditor
+    SowUploadComponent
+    //NumericEditor
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     MatDialogModule,
-    AgGridModule.withComponents([NumericEditor, DateEditor, EmailEditor]),
+    AgGridModule.withComponents([]),
     RouterModule.forRoot([
     {path: 'sow', component: SowDashboardComponent},
     {path: 'delivery-ops', component: DelOpsDashboardComponent},

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { MatDialog, MatDialogConfig } from "@angular/material";
-import { NumericEditor } from '../numeric-editor.component';
+//import { NumericEditor } from '../numeric-editor.component';
 
 @Component({
   selector: 'app-del-ops-dashboard',
@@ -24,7 +24,7 @@ export class DelOpsDashboardComponent {
   constructor(private http: HttpClient) {
 
     this.frameworkComponents = {
-      numericEditor: NumericEditor
+      //numericEditor: NumericEditor
     };
     this.defaultColDef = {
       editable: true,
@@ -37,20 +37,22 @@ export class DelOpsDashboardComponent {
 
     this.saveData = false;
     this.columnDefs = [
-      { headerName: `Chorus Code`, field: `projectCode`, sortable: true, editable: false, width:140 }, //project master model
-      { headerName: 'Velocity Project Code', field: `velocityProjectCode`, sortable: true, editable: false, width: 190},
+      { headerName: `Chorus Code`, field: `chorusCode`, sortable: true, editable: false, width:140 }, //project master model
+      { headerName: 'Velocity Project Code', field: `projectCode`, sortable: true, editable: false, width: 190},
       { headerName: `Project Name`, field: `projectName`, sortable: true, editable: false, width:140 }, //project master model -> velocity code
       { headerName: `Project Health`, field: `projectHealth`, sortable: true, editable: true, width:150 }, //project leading model
-      { headerName: `Onsite FTE Count`, field: `onsiteFteCount`, sortable: true, editable: true, cellEditor: 'numericEditor', width:180}, // ?
-      { headerName: `Offshore FTE Count`, field: `offshoreFteCount`, sortable: true, editable: true, cellEditor: 'numericEditor', width:180 }, // ?
-      { headerName: `Past Due RRs`, field: `pastDueRrs`, sortable: true, editable: true,cellEditor: 'numericEditor', width:140 }, //project leading model
-      { headerName: `Ageing of Past Due RRs`, field: `ageingOfPastDueRrs`, sortable: true, editable: true, cellEditor: 'numericEditor', width:190 }, //project leading model
-      { headerName: `Resource Onboarding Delays`, field: `resourceOnboardingDelay`, sortable: true, editable: true, cellEditor: 'numericEditor', width:200 }, //project leading model
+      { headerName: `Onsite FTE Count`, field: `onsiteFteCount`, sortable: true, editable: true, width:180}, // ?     cellEditor: 'numericEditor',
+      { headerName: `Offshore FTE Count`, field: `offshoreFteCount`, sortable: true, editable: true, width:180 }, // ?   cellEditor: 'numericEditor',
+      { headerName: `Past Due RRs`, field: `pastDueRrs`, sortable: true, editable: true, width:140 }, //project leading model   cellEditor: 'numericEditor',
+      { headerName: `Ageing of Past Due RRs`, field: `ageingOfPastDueRrs`, sortable: true, editable: true, width:190 }, //project leading model cellEditor: 'numericEditor'
+      { headerName: `Resource Onboarding Delays`, field: `resourceOnboardingDelay`, sortable: true, editable: true, width:200 }, //project leading model cellEditor: 'numericEditor',
       { headerName: `EIQ Baselining of resources`, field: `eiqBaseliningOfResources`, sortable: true, editable: true, width:200 }, //project leading model
-      { headerName: `Attrition Count`, field: `attritionCount`, sortable: true, editable: true, cellEditor: 'numericEditor', width:180 }, //project leading model
-      { headerName: `Q2 Revenue (Million)`, field: `revenue`, sortable: true, editable: true, cellEditor: 'numericEditor', width:180 }, //project leading model
-      { headerName: `Q2 Cost (Million)`, field: `cost`, sortable: true, editable: true, cellEditor: 'numericEditor', width:170 }, //project leading model
-      { headerName: `Q2 Margin %`, field: `margin`, sortable: true, editable: true, cellEditor: 'numericEditor', width:140 }, //project leading model
+      { headerName: `Attrition Count`, field: `attritionCount`, sortable: true, editable: true, width:180 }, //project leading model   cellEditor: 'numericEditor',
+      { headerName: `Q2 Revenue (Million)`, field: `revenue`, sortable: true, editable: true, width:180 }, //project leading model   cellEditor: 'numericEditor',
+      { headerName: `Q2 Cost (Million)`, field: `cost`, sortable: true, editable: true, width:170 }, //project leading model        cellEditor: 'numericEditor',
+      { headerName: `Q2 Margin %`, field: `margin`, sortable: true, editable: true, width:140 }, //project leading model            cellEditor: 'numericEditor',
+      { headerName: `Year`, field: `year`, sortable: true, width:140, hide:true },
+      { headerName: `Month`, field: `month`, sortable: true, width:140, hide:true },
     ];
     this.editType = 'fullRow';
   }
@@ -67,18 +69,35 @@ export class DelOpsDashboardComponent {
     });
   }
 
-  OnRowValueChanged(params) {
+  // OnRowValueChanged(params) {
+  //   console.log("row value changed.")
+  //   this.saveData = false;
+  //   this.editedRowData = params.data;
+  //   console.log(this.editedRowData);
+  // }
+  //
+  // OnRowEditingStopped(params){
+  //   console.log("row editing stopped.")
+  //   console.log(params);
+  // }
+
+
+  OnCellValueChanged(params){
+    console.log("Cell value changed.")
+    console.log(params);
     this.saveData = false;
     this.editedRowData = params.data;
   }
 
   OnSaveChanges() {
+    let projectCode = this.editedRowData.projectCode;
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
-    this.http.put('http://localhost:8002/api/citi-portal/updateDetails', this.editedRowData, httpOptions).subscribe(
+
+    this.http.put('http://localhost:8002/api/citi-portal/dev-ops/'+projectCode , this.editedRowData, httpOptions).subscribe(
       val => {
         console.log("PUT call successful value returned in body", val);
       },
@@ -88,7 +107,8 @@ export class DelOpsDashboardComponent {
       () => {
         console.log("The PUT observable is now completed.");
         this.saveData = true;
-        this.gridApi.refreshCells();
+//        this.gridApi.refreshCells();
+        this.gridApi.redrawRows();
         this.gridApi.setRowData(this.newData);
       }
     );
