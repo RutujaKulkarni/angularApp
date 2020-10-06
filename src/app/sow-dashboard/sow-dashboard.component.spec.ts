@@ -45,10 +45,6 @@ describe('SowDashboardComponent', () => {
   });
 
   it('The grid should have all columns', () => {
-    // const appElement = fixture.nativeElement;
-    // const cellElements = appElement.querySelectorAll('.ag-cell-value');
-    // expect(cellElements.length).toEqual(27);
-
     const elm = fixture.nativeElement;
     const grid = elm.querySelector('ag-grid-angular');
     const headerCells = grid.querySelectorAll('.ag-header-cell-text');

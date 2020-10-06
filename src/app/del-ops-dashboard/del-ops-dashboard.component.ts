@@ -13,7 +13,7 @@ export class DelOpsDashboardComponent {
   gridApi: any;
   columnApi: any;
   private editType;
-  private columnDefs;
+  columnDefs;
   private editedRowData: JSON;
   private newData: any;
   saveData: boolean = false;
@@ -40,8 +40,8 @@ export class DelOpsDashboardComponent {
       { headerName: 'Velocity Project Code', field: `projectCode`, sortable: true, editable: false, width: 190},
       { headerName: `Project Name`, field: `projectName`, sortable: true, editable: false, width:140 }, //project master model -> velocity code
       { headerName: `Project Health`, field: `projectHealth`, sortable: true, editable: true, width:150 }, //project leading model
-      { headerName: `Onsite FTE Count`, field: `onsiteFteCount`, sortable: true, editable: true, width:180}, // ?     cellEditor: 'numericEditor',
-      { headerName: `Offshore FTE Count`, field: `offshoreFteCount`, sortable: true, editable: true, width:180 }, // ?   cellEditor: 'numericEditor',
+      { headerName: `Onsite FTE Count`, field: `onsiteFteCount`, sortable: true, editable: false, width:180}, // ?     cellEditor: 'numericEditor',
+      { headerName: `Offshore FTE Count`, field: `offshoreFteCount`, sortable: true, editable: false, width:180 }, // ?   cellEditor: 'numericEditor',
       { headerName: `Past Due RRs`, field: `pastDueRrs`, sortable: true, editable: true, width:140 }, //project leading model   cellEditor: 'numericEditor',
       { headerName: `Ageing of Past Due RRs`, field: `ageingOfPastDueRrs`, sortable: true, editable: true, width:190 }, //project leading model cellEditor: 'numericEditor'
       { headerName: `Resource Onboarding Delays`, field: `resourceOnboardingDelay`, sortable: true, editable: true, width:200 }, //project leading model cellEditor: 'numericEditor',
