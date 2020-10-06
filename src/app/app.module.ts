@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
- import { MatDialogModule } from '@angular/material/dialog';
+//import { MatDialogModule } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AgGridModule } from 'ag-grid-angular';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
+//import { MDBBootstrapModule } from 'angular-bootstrap-md';
 //import { Grid } from 'ag-grid-community';
 import { HttpClientModule } from '@angular/common/http';
 //import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
@@ -29,7 +29,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    MatDialogModule,
     AgGridModule.withComponents([]),
     RouterModule.forRoot([
     {path: 'sow', component: SowDashboardComponent},

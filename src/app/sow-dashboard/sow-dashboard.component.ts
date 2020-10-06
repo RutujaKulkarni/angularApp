@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import { MatDialog, MatDialogConfig } from "@angular/material";
+//import { MatDialog, MatDialogConfig } from "@angular/material";
 //import { NumericEditor } from '../numeric-editor.component';
 
 @Component({
@@ -14,14 +14,14 @@ export class SowDashboardComponent {
   gridApi: any;
   columnApi: any;
   private editType;
-  private columnDefs;
+  columnDefs;
   private editedRowData: JSON;
   private newData: any;
   saveData: boolean = false;
   private frameworkComponents;
   private defaultColDef;
 
-  constructor(private http: HttpClient, private dialog: MatDialog) {
+  constructor(private http: HttpClient) {
     this.frameworkComponents = {
       //numericEditor: NumericEditor
     };

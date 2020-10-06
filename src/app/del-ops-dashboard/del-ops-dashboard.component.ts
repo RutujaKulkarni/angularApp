@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import { MatDialog, MatDialogConfig } from "@angular/material";
 //import { NumericEditor } from '../numeric-editor.component';
 
 @Component({
@@ -90,7 +89,9 @@ export class DelOpsDashboardComponent {
   }
 
   OnSaveChanges() {
-    let projectCode = this.editedRowData.projectCode;
+    let data: any = {};
+    data = this.editedRowData;
+    let projectCode = data.projectCode;
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'

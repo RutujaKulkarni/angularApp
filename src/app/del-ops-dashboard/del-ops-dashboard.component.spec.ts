@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { AgGridModule } from 'ag-grid-angular';
 import { DelOpsDashboardComponent } from './del-ops-dashboard.component';
 
 describe('DelOpsDashboardComponent', () => {
@@ -8,16 +10,18 @@ describe('DelOpsDashboardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DelOpsDashboardComponent ]
-    })
-    .compileComponents();
-  }));
+        imports: [
+            FormsModule,
+            HttpClientModule,
+            AgGridModule.withComponents([])
+        ],
+        declarations: [DelOpsDashboardComponent]
+    }).compileComponents();
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(DelOpsDashboardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();

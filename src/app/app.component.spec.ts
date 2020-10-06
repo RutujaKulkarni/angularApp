@@ -30,6 +30,20 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('aurora-app app is running!');
+    expect(compiled.querySelector('#navbar-brand').textContent).toContain('Aurora Dashboards');
+  });
+
+  it('Nav bar should have SOW menu', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('#navbarNav').textContent).toContain('SOW');
+  });
+
+  it('Nav bar should have Delivery Ops menu', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('#navbarNav').textContent).toContain('Delivery Ops');
   });
 });
