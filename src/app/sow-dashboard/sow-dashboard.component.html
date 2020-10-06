@@ -8,14 +8,12 @@
   <ag-grid-angular
     style="width: 95%; height: 500px;"
     [columnDefs]="columnDefs"
-    [editType]="editType"
     [stopEditingWhenGridLosesFocus]="true"
     [suppressColumnVirtualisation]="true"
     [frameworkComponents]="frameworkComponents"
     [defaultColDef]="defaultColDef"
     (gridReady)="OnGridReady($event)"
-    (rowValueChanged)="OnRowValueChanged($event)"
-    (rowDoubleClicked)="OnRowDoubleClicked($event)">
+    (cellValueChanged)="OnCellValueChanged($event)">
   </ag-grid-angular>
 </div>
 <span style="padding-left:2%; font-size: 12px; font-style: italic;">Please double click on a cell to make it editable. Only one row can be updated at a time.</span>
@@ -23,3 +21,5 @@
   <button type="button" name="button" class="btn btn-primary btn-sm float-right" (click)="OnSaveChanges()" [disabled]="saveData">Save changes</button>
   <button type="button" name="button" class="btn btn-primary btn-sm float-right" routerLink='/sow-upload' style="margin-right: 1%;">Upload Data</button>
 </div>
+    <!-- [editType]="editType"
+    (rowDoubleClicked)="OnRowDoubleClicked($event)"-->

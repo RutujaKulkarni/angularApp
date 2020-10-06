@@ -42,14 +42,14 @@ export class DelOpsDashboardComponent {
       { headerName: `Project Health`, field: `projectHealth`, sortable: true, editable: true, width:150 }, //project leading model
       { headerName: `Onsite FTE Count`, field: `onsiteFteCount`, sortable: true, editable: false, width:180}, // ?     cellEditor: 'numericEditor',
       { headerName: `Offshore FTE Count`, field: `offshoreFteCount`, sortable: true, editable: false, width:180 }, // ?   cellEditor: 'numericEditor',
-      { headerName: `Past Due RRs`, field: `pastDueRrs`, sortable: true, editable: true, width:140 }, //project leading model   cellEditor: 'numericEditor',
-      { headerName: `Ageing of Past Due RRs`, field: `ageingOfPastDueRrs`, sortable: true, editable: true, width:190 }, //project leading model cellEditor: 'numericEditor'
-      { headerName: `Resource Onboarding Delays`, field: `resourceOnboardingDelay`, sortable: true, editable: true, width:200 }, //project leading model cellEditor: 'numericEditor',
+      { headerName: `Past Due RRs`, field: `pastDueRrs`, sortable: true, editable: true, width:140, valueSetter: this.numericValueSetter }, //project leading model   cellEditor: 'numericEditor',
+      { headerName: `Ageing of Past Due RRs`, field: `ageingOfPastDueRrs`, sortable: true, editable: true, width:190, valueSetter: this.numericValueSetter }, //project leading model cellEditor: 'numericEditor'
+      { headerName: `Resource Onboarding Delays (Days)`, field: `resourceOnboardingDelay`, sortable: true, editable: true, width:200 }, //project leading model cellEditor: 'numericEditor',
       { headerName: `EIQ Baselining of resources`, field: `eiqBaseliningOfResources`, sortable: true, editable: true, width:200 }, //project leading model
-      { headerName: `Attrition Count`, field: `attritionCount`, sortable: true, editable: true, width:180 }, //project leading model   cellEditor: 'numericEditor',
-      { headerName: `Q2 Revenue (Million)`, field: `revenue`, sortable: true, editable: true, width:180 }, //project leading model   cellEditor: 'numericEditor',
-      { headerName: `Q2 Cost (Million)`, field: `cost`, sortable: true, editable: true, width:170 }, //project leading model        cellEditor: 'numericEditor',
-      { headerName: `Q2 Margin %`, field: `margin`, sortable: true, editable: true, width:140 }, //project leading model            cellEditor: 'numericEditor',
+      { headerName: `Attrition Count`, field: `attritionCount`, sortable: true, editable: true, width:180, valueSetter: this.numericValueSetter }, //project leading model   cellEditor: 'numericEditor',
+      { headerName: `Q2 Revenue (Million)`, field: `revenue`, sortable: true, editable: true, width:180, valueSetter: this.numericValueSetter }, //project leading model   cellEditor: 'numericEditor',
+      { headerName: `Q2 Cost (Million)`, field: `cost`, sortable: true, editable: true, width:170, valueSetter: this.numericValueSetter }, //project leading model        cellEditor: 'numericEditor',
+      { headerName: `Q2 Margin %`, field: `margin`, sortable: true, editable: true, width:140,  valueParser: this.numericValueSetter }, //project leading model            cellEditor: 'numericEditor',
       { headerName: `Year`, field: `year`, sortable: true, width:140, hide:true },
       { headerName: `Month`, field: `month`, sortable: true, width:140, hide:true },
     ];
@@ -108,26 +108,22 @@ export class DelOpsDashboardComponent {
       () => {
         console.log("The PUT observable is now completed.");
         this.saveData = true;
-//        this.gridApi.refreshCells();
         this.gridApi.redrawRows();
         this.gridApi.setRowData(this.newData);
       }
     );
   }
 
-  OnRowDoubleClicked(params) {
-    this.saveData = false;
+  private numericValueSetter(params){
+    //console.log(params);
+    if (!isNaN(+params.newValue)) {
+      //if value is not NaN after converting to number, return true with change
+      params.data[params.colDef.field] = params.newValue;
+      return params.newValue;
+    }
+    else{
+      //if value is NaN, return false with no change
+      return params.oldValue;
+    }
   }
-
 }
-
-
-/*
-The data model for this dashboard can be captured from
-1. PROJECT LEADING INDICATOR
-2. CHORUS MASTER
-3. PROJECT MASTER
-4. SOW MASTER
-5. PROGRAM MASTER
-
-*/
