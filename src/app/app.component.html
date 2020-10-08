@@ -6,15 +6,19 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="/sow">SOW </a>
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="text-primary" routerLink="/sow">SOW </a>
       </li>
-      <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="/delivery-ops">Delivery Ops</a>
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="text-primary" routerLink="/delivery-ops">Delivery Ops</a>
       </li>
     </ul>
   </div>
 </nav>
+<!-- <div>
+  <button type="btn btn-primary btn-lg" name="button">Navigate to dashboards</button>
+</div> -->
+<app-alerts></app-alerts>
 <router-outlet></router-outlet>
 
 <!-- <span class="sr-only">(current)</span> -->

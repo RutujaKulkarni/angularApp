@@ -1,18 +1,28 @@
 <div class="container row">
   <div class="col-md-12">
-      <h1>Upload File</h1>
+      <h2>Upload SOW File</h2>
   </div>
 </div>
-
-<div class="container row">
-  <div class="col-md-6">
+<br>
+<!-- <div class="container row">
+   <div class="col-md-3" >
       <input type="file" (change)="onFileChanged($event)">
   </div>
-  <div class="col-md-6">
-      <input type="button" (click)="onUpload()" value="upload">
+  <div class="col-md-3">
+      <input type="button" (click)="onUpload()" value="upload" class="btn btn-primary btn-sm float-left">
   </div>
-</div>
+</div> -->
 
+
+<form style="padding-left: 2%;">
+  <div class="custom-file" style="width:20%;">
+    <input type="file" class="custom-file-input" id="customFile" (change)="onFileChanged($event)">
+    <label class="custom-file-label" for="customFile">Choose file</label>
+  </div>
+  <div style="display: inline-flex; padding-left: 2.5%;"> <!-- class="col-md-6"  -->
+      <input type="button" (click)="onUpload()" value="upload" class="btn btn-primary float-left">
+  </div>
+</form>
 <hr />
 
 <div class="container row">
@@ -21,7 +31,20 @@
   </div>
 </div>
 
-<div class="container row">
+
+<!-- <form class="md-form">
+  <div class="file-field">
+    <div class="btn btn-primary btn-sm float-left">
+      <span>Choose file</span>
+      <input type="file">
+    </div>
+    <div class="file-path-wrapper">
+      <input class="file-path validate" type="text" placeholder="Upload your file">
+    </div>
+  </div>
+</form> -->
+
+<!-- <div class="container row">
   <div class="col-md-6">
       <input type="text" class="form-control" id="name" placeholder="File Name" [(ngModel)]="imageName"
           name="name" />
@@ -37,4 +60,4 @@
           <img [src]="retrievedImage">
       </div>
   </div>
-</div>
+</div> -->

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpEventType } from '@angular/common/http';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-sow-upload',
@@ -8,7 +9,7 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
 })
 export class SowUploadComponent implements OnInit {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private route: ActivatedRoute, private router: Router) { }
 
   selectedFile: File;
   retrievedImage: any;
@@ -17,7 +18,7 @@ export class SowUploadComponent implements OnInit {
   message: string;
   imageName: any;
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   //Gets called when the user selects an image
   public onFileChanged(event) {
@@ -30,15 +31,38 @@ export class SowUploadComponent implements OnInit {
     //FormData API provides methods and properties to allow us easily prepare form data to be sent with POST HTTP requests.
     const uploadImageData = new FormData();
     uploadImageData.append('file', this.selectedFile, this.selectedFile.name);
-      this.httpClient.post('http://localhost:8000/api/citi-portal/uploadFile', uploadImageData, { observe: 'response' })
-        .subscribe((response) => {
-          if (response.status === 200) {
-            this.message = 'Excel uploaded successfully';
-          } else {
-            this.message = 'Excel uploaded successfully';
-          }
+    this.httpClient.post('http://localhost:8000/api/citi-portal/uploadFile', uploadImageData, { observe: 'response' })
+      .subscribe(
+        val => {
+          console.log("POST call successful value returned in body", val);
+          alert("SOW file uploaded successfully!");
+          this.router.navigate(['/sow']);
+        },
+        response => {
+          console.log("POST call in error", response);
+          alert("SOW file uploaded successfully!");
+          this.router.navigate(['/sow']);
+        },
+        () => {
+          console.log("The POST observable is now completed.");
+          //alert("SOW file uploaded successfully!");
+          //this.router.navigate(['/sow']);
         }
       );
   }
 
 }
+
+/*
+(response) => {
+  if (response.status === 200) {
+    this.message = 'Excel uploaded successfully';
+    alert("Excel uploaded successfully");
+    this.router.navigate(['/sow']);
+  } else {
+    this.message = 'Excel uploaded successfully';
+    alert("Excel uploaded successfully");
+    this.router.navigate(['/sow']);
+  }
+}
+*/

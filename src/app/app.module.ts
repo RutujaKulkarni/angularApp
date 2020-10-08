@@ -14,15 +14,16 @@ import { SowDashboardComponent } from './sow-dashboard/sow-dashboard.component';
 import { DelOpsDashboardComponent } from './del-ops-dashboard/del-ops-dashboard.component';
 import { SowUploadComponent } from './sow-upload/sow-upload.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-//import { NumericEditor } from './numeric-editor.component';
-
+import { LandingPageComponent } from './landing-page/landing-page.component';
+import { AlertsModule } from 'angular-alert-module';
 
 @NgModule({
   declarations: [
     AppComponent,
     SowDashboardComponent,
     DelOpsDashboardComponent,
-    SowUploadComponent
+    SowUploadComponent,
+    LandingPageComponent
     //NumericEditor
   ],
   imports: [
@@ -30,10 +31,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     HttpClientModule,
     AgGridModule.withComponents([]),
+    AlertsModule.forRoot(),
     RouterModule.forRoot([
     {path: 'sow', component: SowDashboardComponent},
     {path: 'delivery-ops', component: DelOpsDashboardComponent},
-    {path: 'sow-upload', component: SowUploadComponent}
+    {path: 'sow-upload', component: SowUploadComponent},
+    {path: '', component: LandingPageComponent}
   ]),
     BrowserAnimationsModule
     /*AppRoutingModule*/

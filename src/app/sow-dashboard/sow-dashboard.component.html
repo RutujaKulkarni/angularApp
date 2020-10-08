@@ -1,25 +1,48 @@
 <head>
   <link rel="stylesheet" href="https://unpkg.com/@ag-grid-community/all-modules@23.0.0/dist/styles/ag-grid.css" />
   <link rel="stylesheet" href="https://unpkg.com/@ag-grid-community/all-modules@23.0.0/dist/styles/ag-theme-alpine.css" />
+
+  <style>
+    .ag-header-cell-text-wrap {
+      overflow: visible;
+      text-overflow: unset;
+      white-space: normal;
+    }
+    .ag-header-cell-text {
+      overflow: visible;
+      text-overflow: unset;
+      white-space: normal;
+    }
+    /* .ag-header-cell-label {
+      overflow: visible;
+      text-overflow: unset;
+      white-space: normal;
+    } */
+  </style>
+
 </head>
 
 <br>
 <div id="myGrid" class="ag-theme-alpine" style="padding-left:2%;">
-  <ag-grid-angular
-    style="width: 95%; height: 500px;"
-    [columnDefs]="columnDefs"
-    [stopEditingWhenGridLosesFocus]="true"
-    [suppressColumnVirtualisation]="true"
-    [frameworkComponents]="frameworkComponents"
-    [defaultColDef]="defaultColDef"
-    (gridReady)="OnGridReady($event)"
-    (cellValueChanged)="OnCellValueChanged($event)">
+  <ag-grid-angular style="width: 95%; height: 500px;" [columnDefs]="columnDefs" [stopEditingWhenGridLosesFocus]="true" [suppressColumnVirtualisation]="true" [defaultColDef]="defaultColDef"
+    (gridReady)="OnGridReady($event)" (cellValueChanged)="OnCellValueChanged($event)">
   </ag-grid-angular>
 </div>
 <span style="padding-left:2%; font-size: 12px; font-style: italic;">Please double click on a cell to make it editable. Only one row can be updated at a time.</span>
 <div style="padding-right: 5%; padding-top: 1%;">
   <button type="button" name="button" class="btn btn-primary btn-sm float-right" (click)="OnSaveChanges()" [disabled]="saveData">Save changes</button>
-  <button type="button" name="button" class="btn btn-primary btn-sm float-right" routerLink='/sow-upload' style="margin-right: 1%;">Upload Data</button>
+  <button type="button" name="button" class="btn btn-primary btn-sm float-right" (click)="OnAddRow()" [disabled]="newRow" style="margin-right: 0.5%;">Add SOW</button>
+  <button type="button" name="button" class="btn btn-primary btn-sm float-right" routerLink='/sow-upload' style="margin-right: 0.5%;">Upload SOW</button>
 </div>
-    <!-- [editType]="editType"
-    (rowDoubleClicked)="OnRowDoubleClicked($event)"-->
+<!-- [editType]="editType"
+    (rowDoubleClicked)="OnRowDoubleClicked($event)"
+    (firstDataRendered)="headerHeightSetter($event)"
+    (columnResized)="headerHeightSetter($event)"-->
+<!-- <link rel="stylesheet" type="text/css" href="/sow-dashboard.component.css" />
+ag-header-cell-text
+ag-header-cell-label
+ag-cell-label-container
+
+
+[pagination]="true" [paginationPageSize]="paginationPageSize" [frameworkComponents]="frameworkComponents"
+-->

@@ -36,8 +36,8 @@ export class DelOpsDashboardComponent {
 
     this.saveData = false;
     this.columnDefs = [
-      { headerName: `Chorus Code`, field: `chorusCode`, sortable: true, editable: false, width:140 }, //project master model
-      { headerName: 'Velocity Project Code', field: `projectCode`, sortable: true, editable: false, width: 190},
+      { headerName: `Chorus Code`, field: `chorusCode`, pinned: 'left', sortable: true, editable: false, width:140 }, //project master model
+      { headerName: 'Velocity Project Code', field: `projectCode`, pinned: 'left', sortable: true, editable: false, width: 190},
       { headerName: `Project Name`, field: `projectName`, sortable: true, editable: false, width:140 }, //project master model -> velocity code
       { headerName: `Project Health`, field: `projectHealth`, sortable: true, editable: true, width:150 }, //project leading model
       { headerName: `Onsite FTE Count`, field: `onsiteFteCount`, sortable: true, editable: false, width:180}, // ?     cellEditor: 'numericEditor',
@@ -101,9 +101,11 @@ export class DelOpsDashboardComponent {
     this.http.put('http://localhost:8002/api/citi-portal/dev-ops/'+projectCode , this.editedRowData, httpOptions).subscribe(
       val => {
         console.log("PUT call successful value returned in body", val);
+        alert("Data updated succesfully");
       },
       response => {
         console.log("PUT call in error", response);
+        alert("Data could not be updated. Please try again.");
       },
       () => {
         console.log("The PUT observable is now completed.");
@@ -123,6 +125,7 @@ export class DelOpsDashboardComponent {
     }
     else{
       //if value is NaN, return false with no change
+      alert("Value entered is not a number.");
       return params.oldValue;
     }
   }

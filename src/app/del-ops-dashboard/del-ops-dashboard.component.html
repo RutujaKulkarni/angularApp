@@ -20,7 +20,7 @@
 <span style="padding-left:2%; font-size: 12px; font-style: italic;">Please double click on a cell to make it editable. Only one row can be updated at a time.</span>
 <div style="padding-right: 5%; padding-top: 1%;">
   <button type="button" name="button" class="btn btn-primary btn-sm float-right" (click)="OnSaveChanges()" [disabled]="saveData">Save changes</button>
-  <button type="button" name="button" class="btn btn-primary btn-sm float-right" style="margin-right: 1%;">Upload Data</button>
+  <button type="button" name="button" class="btn btn-secondary btn-sm float-right" style="margin-right: 1%;" [disabled]='true' >Upload Data</button>
 </div>
 <!-- [editType]="editType"
 (rowDoubleClicked)="OnRowDoubleClicked($event)"

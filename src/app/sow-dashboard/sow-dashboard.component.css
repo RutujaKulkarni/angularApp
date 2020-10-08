@@ -1,0 +1,11 @@
+.ag-header-cell-label {
+    text-overflow: clip;
+    overflow: visible;
+    white-space: normal;
+}
+
+.ag-header-cell-text {
+   overflow: visible;
+   text-overflow: unset;
+   white-space: normal;
+}
