@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import { AlertsService } from 'angular-alert-module';
 
-// this.alerts.setMessage('All the fields are required','error');
-// this.alerts.setMessage('Configurations saved successfully!','success');
-// this.alerts.setMessage('Please save all the changes before closing','warn');
 @Component({
   selector: 'app-sow-dashboard',
   templateUrl: './sow-dashboard.component.html',
@@ -25,9 +21,8 @@ export class SowDashboardComponent {
   private newRow: boolean = false;
   private paginationPageSize;
 
-  constructor(private alerts: AlertsService, private http: HttpClient) {
-    this.alerts.setDefaults('timeout',0);
-    this.alerts.setConfig('warn','icon','warning');
+  constructor(private http: HttpClient) {
+
     this.paginationPageSize = 8;
     this.frameworkComponents = {
       //numericEditor: NumericEditor
@@ -44,15 +39,15 @@ export class SowDashboardComponent {
 
     this.saveData = false;
     this.columnDefs = [
-      { headerName: `SOW ID`, field: `sowContractId`, sortable: true, editable: true, pinned: 'left', sort: { direction: 'desc' } },
-      { headerName: `SOW ID PK`, field: `sowId`, sortable: true, hide:true, cellClass: 'ag-header-cell-text-wrap' },
-      { headerName: `Contract Name`, field: `contractName`, sortable: true,editable: true },
-      { headerName: `Contract Pred ID`, field: `sowContractPredId`, sortable: true, editable: true },
-      { headerName: `Signed Effective Date`, field: `signedEffectiveDate`, sortable: true, valueParser:this.dateValueSetter, editable: true }, //date
-      { headerName: `SOW start Date`, field: `sowStartDate`, sortable: true, valueParser:this.dateValueSetter, editable: true }, //date
-      { headerName: `SOW end Date`, field: `sowEndDate`, sortable: true, valueParser:this.dateValueSetter, editable: true }, //date
+      { headerName: `SOW ID`, field: `sowContractId`, sortable: true, width:150, pinned: 'left', sort: { direction: 'desc' } },
+      { headerName: `SOW ID PK`, field: `sowId`, sortable: true, hide:true },
+      { headerName: `Contract Name`, field: `contractName`, sortable: true,editable: true, width:190 },
+      { headerName: `Contract Pred ID`, field: `sowContractPredId`, sortable: true, editable: true,width:190 },
+      { headerName: `Signed Effective Date`, field: `signedEffectiveDate`, sortable: true, valueParser:this.dateValueSetter, editable: true,width:140 }, //date
+      { headerName: `SOW start Date`, field: `sowStartDate`, sortable: true, valueParser:this.dateValueSetter, editable: true, width:140 }, //date
+      { headerName: `SOW end Date`, field: `sowEndDate`, sortable: true, valueParser:this.dateValueSetter, editable: true, width:140 }, //date
       { headerName: `Tenure`, field: `tenure`, sortable: true, valueParser: this.numericValueSetter, editable: true, width:80 }, //int
-      { headerName: `FG ID`, field: `fgId`, sortable: true, editable: true }, //string
+      { headerName: `FG ID`, field: `fgId`, sortable: true, editable: true, width:150 }, //string
       { headerName: `Source Data`, field: `sourceData`, sortable: true , editable: true},
       { headerName: `Status`, field: `status`, sortable: true, editable: true, width:110 },
       { headerName: `Citi Legal Entity Seq`, field: `auroraCitiLegalEntitySeqFk`, sortable: true, hide:true }, //hide
@@ -61,12 +56,12 @@ export class SowDashboardComponent {
       { headerName: `Sector Type Seq`, field: `auroraSectorTypeSeqFk`, sortable: true, hide:true }, //hide
       { headerName: `Area`, field: `area`, sortable: true,editable: true },
       { headerName: `Business Unit Seq`, field: `auroraBusinessUnitSeqFk`, sortable: true, hide:true }, //hide
-      { headerName: `Citi SOW Owner Name`, field: `citiSowOwnerName`, sortable: true, editable: true },
-      { headerName: `Citi SOW Owner Email Id`, field: `citiSowOwnerEmailId`, sortable: true, editable: true, valueSetter: this.emailValueSetter },
-      { headerName: `Citi Project Manager`, field: `citiPM`, sortable: true, editable: true },
-      { headerName: `Citi Project Manager Email Id`, field: `citiPMEmailId`, sortable: true, editable: true, valueSetter: this.emailValueSetter },
-      { headerName: `Virtusa PM Name`, field: `virtusaPMName`, sortable: true, editable: true },
-      { headerName: `Virtusa PM EmailId`, field: `virtusaPMEmailId`, sortable: true, editable: true, valueSetter: this.emailValueSetter },
+      { headerName: `Citi SOW Owner Name`, field: `citiSowOwnerName`, sortable: true, editable: true, width:180 },
+      { headerName: `Citi SOW Owner Email Id`, field: `citiSowOwnerEmailId`, sortable: true, editable: true, valueSetter: this.emailValueSetter,width:190 },
+      { headerName: `Citi Project Manager`, field: `citiPM`, sortable: true, editable: true, width:180 },
+      { headerName: `Citi Project Manager Email Id`, field: `citiPMEmailId`, sortable: true, editable: true, valueSetter: this.emailValueSetter, width:190 },
+      { headerName: `Virtusa PM Name`, field: `virtusaPMName`, sortable: true, editable: true, width:190 },
+      { headerName: `Virtusa PM EmailId`, field: `virtusaPMEmailId`, sortable: true, editable: true, valueSetter: this.emailValueSetter,width:190 },
       { headerName: `Auto Email Triggered Flag`, field: `autoEmailTriggeredFlag`, sortable: true, editable: true },
       { headerName: `Auto Email Triggered Date`, field: `autoEmailTriggeredDate`, sortable: true, valueParser:this.dateValueSetter, editable: true}, //date
       { headerName: `Key Personnel SOW Count`, field: `keyPersonnelSOWCount`, sortable: true, valueParser: this.numericValueSetter, editable: true }, //int
@@ -118,11 +113,8 @@ export class SowDashboardComponent {
     this.newRow = false;
     this.gridApi = params.api;
     this.columnApi = params.columnApi;
-    this.gridApi.setHeaderHeight(48);
-    this.gridApi.resetRowHeights();
     this.fetchData();
     this.autoSizeAll(true);
-    //this.setHeaderHeight(80);
   }
 
   fetchData(){
@@ -145,7 +137,6 @@ export class SowDashboardComponent {
     }else{
       this.updateDetails();
     }
-    this.fetchData();
   }
 
   updateDetails(){
@@ -159,19 +150,17 @@ export class SowDashboardComponent {
     this.http.put('http://localhost:8000/api/citi-portal/updateDetails', this.editedRowData, httpOptions).subscribe(
       val => {
         console.log("PUT call successful value returned in body", val);
-        //this.alerts.setMessage('SOW updated successfully!','success');
         alert("SOW updated successfully!");
       },
       response => {
         console.log("PUT call in error", response);
-        //this.alerts.setMessage('SOW could not be updated. Please try again!','error');
         alert("SOW could not be updated. Please try again!");
       },
       () => {
         console.log("The PUT observable is now completed.");
         this.saveData = true;
         this.newRow = false;
-        this.gridApi.setRowData(this.newData);
+        this.fetchData();
       }
     );
   }
@@ -187,19 +176,17 @@ export class SowDashboardComponent {
     this.http.post('http://localhost:8000/api/citi-portal/addDetails', this.editedRowData, httpOptions).subscribe(
       val => {
         console.log("POST call successful value returned in body", val);
-        //this.alerts.setMessage('SOW added successfully!','success');
         alert("SOW added successfully!");
       },
       response => {
         console.log("POST call in error", response);
-        //this.alerts.setMessage('SOW could not be added. Please try again!','error');
         alert("SOW could not be added. Please try again!");
       },
       () => {
         console.log("The POST observable is now completed.");
         this.saveData = true;
         this.newRow = false;
-        this.gridApi.setRowData(this.newData);
+        this.fetchData();
       }
     );
   }
@@ -214,7 +201,6 @@ export class SowDashboardComponent {
     }
     else{
       //if value is NaN, return false with no change
-      //this.alerts.setMessage('Entered value is not a number','warn');
       return params.oldValue;
     }
   }
@@ -227,7 +213,6 @@ export class SowDashboardComponent {
         params.data[params.colDef.field] = params.newValue;
         return params.newValue;
       }else{
-        //this.alerts.setMessage('Entered value is not an email','warn');
         return '';
       }
     }
@@ -246,7 +231,6 @@ export class SowDashboardComponent {
   	}else{
       //if value is NaN, return false with no change
       alert("Entered value is not a date. Please use yyyy-mm-dd format.");
-      //this.alerts.setMessage('Entered value is not a date. Please use yyyy-mm-dd format.','warn');
       return params.oldValue;
     }
   }

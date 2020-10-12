@@ -60,6 +60,10 @@ export class DelOpsDashboardComponent {
     this.saveData = true;
     this.gridApi = params.api;
     this.columnApi = params.columnApi;
+    this.fetchData();
+  }
+
+  fetchData(){
     this.http.get('http://localhost:8002/api/citi-portal/dev-ops/details').subscribe(data => {//perform the async call
       this.newData = data;
       console.log(this.newData);
@@ -111,7 +115,7 @@ export class DelOpsDashboardComponent {
         console.log("The PUT observable is now completed.");
         this.saveData = true;
         this.gridApi.redrawRows();
-        this.gridApi.setRowData(this.newData);
+        this.fetchData();
       }
     );
   }
