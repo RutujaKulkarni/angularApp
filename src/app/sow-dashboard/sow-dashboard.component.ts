@@ -154,7 +154,7 @@ export class SowDashboardComponent {
       },
       response => {
         console.log("PUT call in error", response);
-        alert("SOW could not be updated. Please try again!");
+        alert("SOW could not be updated. Please try again! "+response.error.message);
       },
       () => {
         console.log("The PUT observable is now completed.");

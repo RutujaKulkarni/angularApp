@@ -1,48 +1,36 @@
 <head>
   <link rel="stylesheet" href="https://unpkg.com/@ag-grid-community/all-modules@23.0.0/dist/styles/ag-grid.css" />
   <link rel="stylesheet" href="https://unpkg.com/@ag-grid-community/all-modules@23.0.0/dist/styles/ag-theme-alpine.css" />
-
-  <style>
-    .ag-header-cell-text-wrap {
-      overflow: visible;
-      text-overflow: unset;
-      white-space: normal;
-    }
-    .ag-header-cell-text {
-      overflow: visible;
-      text-overflow: unset;
-      white-space: normal;
-    }
-    /* .ag-header-cell-label {
-      overflow: visible;
-      text-overflow: unset;
-      white-space: normal;
-    } */
-  </style>
-
 </head>
 
-<br>
-<div id="myGrid" class="ag-theme-alpine" style="padding-left:2%;">
-  <ag-grid-angular style="width: 95%; height: 500px;" [columnDefs]="columnDefs" [stopEditingWhenGridLosesFocus]="true" [suppressColumnVirtualisation]="true" [defaultColDef]="defaultColDef"
-    (gridReady)="OnGridReady($event)" (cellValueChanged)="OnCellValueChanged($event)">
-  </ag-grid-angular>
-</div>
-<span style="padding-left:2%; font-size: 12px; font-style: italic;">Please double click on a cell to make it editable. Only one row can be updated at a time.</span>
-<div style="padding-right: 5%; padding-top: 1%;">
-  <button type="button" name="button" class="btn btn-primary btn-sm float-right" (click)="OnSaveChanges()" [disabled]="saveData">Save changes</button>
-  <button type="button" name="button" class="btn btn-primary btn-sm float-right" (click)="OnAddRow()" [disabled]="newRow" style="margin-right: 0.5%;">Add SOW</button>
-  <button type="button" name="button" class="btn btn-primary btn-sm float-right" routerLink='/sow-upload' style="margin-right: 0.5%;">Upload SOW</button>
-</div>
-<!-- [editType]="editType"
-    (rowDoubleClicked)="OnRowDoubleClicked($event)"
-    (firstDataRendered)="headerHeightSetter($event)"
-    (columnResized)="headerHeightSetter($event)"-->
-<!-- <link rel="stylesheet" type="text/css" href="/sow-dashboard.component.css" />
-ag-header-cell-text
-ag-header-cell-label
-ag-cell-label-container
+<div class="parent-container">
+  <p class="parent-container-heading">SOW Data Maintainance</p>
+  <hr>
+  <span class="parent-container-text-sm grid-record-count-text">8 Records </span> <div class="vertical-line-break"></div> <span> Area: Tech</span>
+  <button type="button" name="button" class="btn _btn-primary-fancy btn-sm float-right" routerLink='/sow-upload' style="margin-right:2%;">
+    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-upload _btn-icon-style icon-upload" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+      <path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+    </svg>
+    <span class="_btn-text">Batch Upload</span></button>
+  <hr>
+  <div id="myGrid"  style="padding-left:2%;">
+    <ag-grid-angular class="ag-theme-alpine" style="width: 98%; height: 400px;" [columnDefs]="columnDefs" [stopEditingWhenGridLosesFocus]="true" [suppressColumnVirtualisation]="true" [defaultColDef]="defaultColDef"
+      (gridReady)="OnGridReady($event)" (cellValueChanged)="OnCellValueChanged($event)">
+    </ag-grid-angular>
+    <button type="button" name="button" class="btn _btn-round _btn-float-add" (click)="OnAddRow()" [disabled]="newRow">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-plus-circle _btn-round-floating-icon-style" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+        <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+      </svg>
+    </button>
 
-
-[pagination]="true" [paginationPageSize]="paginationPageSize" [frameworkComponents]="frameworkComponents"
--->
+    <button type="button" name="button" class="btn _btn-round float-right _btn-float-save" (click)="OnSaveChanges()" [disabled]="saveData">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-files _btn-round-floating-icon-style" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M4 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm0 1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1H4z"/>
+        <path d="M6 0h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2v-1a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1H4a2 2 0 0 1 2-2z"/>
+      </svg>
+    </button>
+  </div>
+  <span class="grid-info-txt">Please double click on a cell to make it editable. Only one row can be updated at a time.</span>
+</div>

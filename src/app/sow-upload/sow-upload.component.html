@@ -1,63 +1,28 @@
-<div class="container row">
-  <div class="col-md-12">
-      <h2>Upload SOW File</h2>
-  </div>
-</div>
-<br>
-<!-- <div class="container row">
-   <div class="col-md-3" >
-      <input type="file" (change)="onFileChanged($event)">
-  </div>
-  <div class="col-md-3">
-      <input type="button" (click)="onUpload()" value="upload" class="btn btn-primary btn-sm float-left">
-  </div>
-</div> -->
 
-
-<form style="padding-left: 2%;">
-  <div class="custom-file" style="width:20%;">
-    <input type="file" class="custom-file-input" id="customFile" (change)="onFileChanged($event)">
-    <label class="custom-file-label" for="customFile">Choose file</label>
+<div class="parent-container">
+  <p class="parent-container-heading">SOW Batch upload<p>
+  <div class="download-file-info">
+    <span class="download-file-info-txt">Need help with uploading a file template? Download a file template!</span>
   </div>
-  <div style="display: inline-flex; padding-left: 2.5%;"> <!-- class="col-md-6"  -->
-      <input type="button" (click)="onUpload()" value="upload" class="btn btn-primary float-left">
-  </div>
-</form>
-<hr />
+  <p class="parent-container-text" style="margin-top: 20px; margin-bottom: 0px;">Upload File</p>
 
-<div class="container row">
-  <div class="col-md-12">
-      <div *ngIf=message>{{message}}</div>
-  </div>
-</div>
-
-
-<!-- <form class="md-form">
-  <div class="file-field">
-    <div class="btn btn-primary btn-sm float-left">
-      <span>Choose file</span>
-      <input type="file">
-    </div>
-    <div class="file-path-wrapper">
-      <input class="file-path validate" type="text" placeholder="Upload your file">
-    </div>
-  </div>
-</form> -->
-
-<!-- <div class="container row">
-  <div class="col-md-6">
-      <input type="text" class="form-control" id="name" placeholder="File Name" [(ngModel)]="imageName"
-          name="name" />
-  </div>
-  <div class="col-md-6">
-      <input type="button" (click)="getImage()" value="Get Data">
-  </div>
-</div>
-
-<div class="container row">
-  <div class="col-md-12">
-      <div *ngIf=retrievedImage>
-          <img [src]="retrievedImage">
+  <div class="upload-container">
+    <!-- <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-earmark-text-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" d="M2 2a2 2 0 0 1 2-2h5.293A1 1 0 0 1 10 .293L13.707 4a1 1 0 0 1 .293.707V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm7 2l.5-2.5 3 3L10 5a1 1 0 0 1-1-1zM4.5 8a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7zM4 10.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5z"/>
+    </svg> -->
+    <form style="padding-left: 2%;">
+      <div class="_upload-component">
+        <input type="file" class="custom-file-input" id="customFile" (change)="onFileChanged($event)">
+        <label class="custom-file-label" for="customFile"></label>
       </div>
+    </form>
+    <div class="container row">
+      <div class="col-md-12">
+          <div *ngIf=message>{{message}}</div>
+      </div>
+    </div>
   </div>
-</div> -->
+  <div > <!-- class="col-md-6"  style="display: inline-flex; padding-left: 2.5%;" -->
+      <input type="button" (click)="onUpload()" value="upload" class="btn btn-primary" style="margin-left: 52%;margin-top: 1%;">
+  </div>
+</div>

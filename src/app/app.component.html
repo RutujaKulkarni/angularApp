@@ -1,24 +1,30 @@
+<head>
+  <link rel="stylesheet" href="/app.component.css">
+</head>
+<div class="row">
+  <div class="col _nav-col">
+    <nav class="navbar navbar-expand-lg navbar-light navbar-color" style="width:1530px;">
+        <ul class="navbar-nav flex-column" style="align-self: flex-start;">
+          <li class="nav-item">
+            <a class="_nav-regular" routerLinkActive="_nav-clicked" href="#">Aurora Dashboards</a>
+          </li>
+          <li class="nav-item">
+            <a class="_nav-regular" routerLinkActive="_nav-clicked" routerLink="/sow">SOW</a>
+          </li>
+          <li class="nav-item">
+            <a class="_nav-regular" routerLinkActive="_nav-clicked" routerLink="/delivery-ops">Delivery Ops</a>
+          </li>
+          <li class="nav-item">
+            <a class="_nav-regular" routerLinkActive="_nav-clicked" routerLink="/sbu">SBU Dashboard</a>
+          </li>
+        </ul>
+    </nav>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" id="navbar-brand" href="#">Aurora Dashboards</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" routerLinkActive="text-primary" routerLink="/sow">SOW </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLinkActive="text-primary" routerLink="/delivery-ops">Delivery Ops</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLinkActive="text-primary" routerLink="/sbu">SBU Dashboard</a>
-      </li>
-      <!-- <li class="nav-item">
-        <a class="nav-link" routerLinkActive="text-primary" routerLink="/about">About</a>
-      </li> -->
-    </ul>
   </div>
-</nav>
-<router-outlet></router-outlet>
+  <div class="col-sm-9">
+      <router-outlet></router-outlet>
+  </div>
+  <div class="col-sm-1">
+
+  </div>
+</div>

@@ -1,0 +1,42 @@
+@import "../app.component.css";
+
+
+.upload-container{
+  top: 299px;
+  left: 118px;
+  width: 660px;
+  height: 262px;
+  background: #F8F8F8 0% 0% no-repeat padding-box;
+  border-radius: 8px;
+  opacity: 1;
+}
+
+.download-file-info{
+  top: 161px;
+  left: 118px;
+  width: 1130px;
+  height: 64px;
+  background: #EEF9FF 0% 0% no-repeat padding-box;
+  border-radius: 17px;
+  opacity: 1;
+}
+
+.download-file-info-txt{
+  text-align: left;
+  margin-top: 20px;
+  margin-left: 2%;
+  position: absolute;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  letter-spacing: 0px;
+  color: #7B7B7B;
+  opacity: 1;
+}
+
+._upload-component{
+  width: 50%;
+  margin-top: 190px;
+  margin-left: 150px;
+  position: relative;
+  display: inline-block;
+}

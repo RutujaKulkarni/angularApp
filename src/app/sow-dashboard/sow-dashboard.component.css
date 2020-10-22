@@ -1,11 +1,49 @@
-.ag-header-cell-label {
-    text-overflow: clip;
-    overflow: visible;
-    white-space: normal;
+@import "../app.component.css";
+
+
+.grid-record-count-text{
+    font-weight: bold;
 }
 
-.ag-header-cell-text {
-   overflow: visible;
-   text-overflow: unset;
-   white-space: normal;
+
+.vertical-line-break{
+width: 1px;
+background-color: #2196f3;
+display: inline-block;
+height: 17px;
+vertical-align: middle;
+margin-left: 10px;
+margin-right: 10px;
+}
+
+/*floating button for adding record */
+._btn-float-add{
+  position: absolute;
+  bottom: 100px;
+  left: 1000px;
+}
+
+/*floating button for saving record */
+._btn-float-save{
+  position: absolute;
+  bottom: 100px;
+  left: 1055px;
+}
+
+._btn-round-floating-icon-style{
+  top: 598px;
+  left: 1186px;
+  width: 24px;
+  height: 25px;
+  color: #FFFFFF;
+  opacity: 1;
+}
+
+/*For icons such as upload icon on the batch upload button*/
+._btn-icon-style{
+  color: #006AA5;
+}
+
+.icon-upload{
+    margin-right: 10px;
 }

@@ -1,0 +1,70 @@
+
+body {margin-top: 0px;margin-left: 0px;}
+
+.navbar-color{background-color: rgb(0 106 165 / 1);}
+
+._nav-clicked{color: var(--white)!important;}
+
+._nav-regular{color: #9E9E9E; padding: 8px; display: block;}
+
+._nav-col{flex: 0 0 16.666667%;max-width:12.5%;}
+
+/*The parent container on all pages.*/
+.parent-container{
+  background-color: white;
+  margin-top: 40px;
+  height: 600px;
+}
+
+.parent-container-heading{
+  font-size: 25px;
+  padding-left:2%;
+  padding-top: 10px;
+  text-align: left;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+  letter-spacing: 0px;
+  color: #053354;
+  opacity: 1;
+}
+
+.parent-container-text{
+  padding-left:2%;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 18px;
+  opacity: 1;
+}
+
+.parent-container-text-sm{
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  padding-left:2%;
+}
+
+._btn-primary-fancy{
+  background: #EAEFFC 0% 0% no-repeat padding-box;
+  border-radius: 2px;
+  opacity: 1;
+}
+
+._btn-round{
+  width: 52px;
+  height: 52px;
+  background: #00AAE8 0% 0% no-repeat padding-box;
+  box-shadow: 0px 6px 6px #0000003D;
+  border: 0.5px solid #FFFFFF1F;
+  border-radius: 35px;
+  opacity: 70%;
+}
+._btn-text{
+  text-align: left;
+  font: normal normal normal 14px/19px Open Sans;
+  letter-spacing: 0px;
+  color: #006AA5;
+  opacity: 1;
+}
+.grid-info-txt{
+  padding-left:2%;
+  font-size: 12px;
+  font-style: italic;
+}
