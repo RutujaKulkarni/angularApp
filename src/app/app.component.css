@@ -7,13 +7,21 @@ body {margin-top: 0px;margin-left: 0px;}
 
 ._nav-regular{color: #9E9E9E; padding: 8px; display: block;}
 
-._nav-col{flex: 0 0 16.666667%;max-width:12.5%;}
+._nav-col{
+  flex: 0 0 10.6%;
+  max-width: 10.6%;
+}
+
+._container-col{
+  flex: 0 0 86%;
+  max-width: 87.333333%;
+}
 
 /*The parent container on all pages.*/
 .parent-container{
   background-color: white;
-  margin-top: 40px;
-  height: 600px;
+  margin-top: 5%;
+  height: 86%;
 }
 
 .parent-container-heading{
@@ -21,7 +29,7 @@ body {margin-top: 0px;margin-left: 0px;}
   padding-left:2%;
   padding-top: 10px;
   text-align: left;
-  font-family: 'Open Sans', sans-serif;
+  font-family: sans-serif;
   font-size: 20px;
   letter-spacing: 0px;
   color: #053354;
@@ -58,7 +66,9 @@ body {margin-top: 0px;margin-left: 0px;}
 }
 ._btn-text{
   text-align: left;
-  font: normal normal normal 14px/19px Open Sans;
+  /* font: normal normal normal 14px/19px Open Sans; */
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
   letter-spacing: 0px;
   color: #006AA5;
   opacity: 1;
@@ -68,3 +78,40 @@ body {margin-top: 0px;margin-left: 0px;}
   font-size: 12px;
   font-style: italic;
 }
+
+.ag-theme-alpine {
+    font-family: sans-serif;
+    /* font-style: italic; */
+    --ag-header-background-color: #d3e0f1;
+    --ag-foreground-color: #d3e0f1;
+}
+
+/* .ag-theme-alpine.ag-header-cell {
+    padding-left: 18px;
+    padding-right: 18px;
+    background-color: #d3e0f1;
+    --ag-foreground-color: red;
+}
+
+.ag-theme-alpine.ag-header {
+    background-color: #f8f8f8;
+    border-bottom: solid 1px #babfc7;
+    background-color:  #d3e0f1;
+    --ag-foreground-color: yellow;
+}
+.ag-theme-alpine .ag-pinned-left-header {
+    border-right: solid 1px #babfc7;
+    background-color: #eaf4fe;
+} */
+/* .ag-theme-alpine {
+    @include ag-theme-alpine((
+        foreground-color: #d3e0f1
+    ));
+}
+
+.ag-theme-alpine .ag-header-cell,
+.ag-theme-alpine .ag-header-group-cell {
+    padding-left: 18px;
+    padding-right: 18px;
+    background-color: blue;
+  } */

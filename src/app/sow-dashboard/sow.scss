@@ -1,0 +1,17 @@
+@import "~ag-grid-community/src/styles/ag-grid.scss";
+@import "~ag-grid-community/src/styles/ag-theme-alpine/sass/ag-theme-alpine-mixin";
+
+.ag-theme-alpine {
+    @include ag-theme-alpine((
+        // use theme parameters where possible
+        header-background-color: red
+    ));
+
+    .ag-header {
+        // or write CSS selectors to make customisations beyond what the parameters support
+        background-color: #cedcff;
+        header-background-color: #cedcff;
+        --ag-background-color: #1184ff;
+        text-style: italic;
+    }
+}

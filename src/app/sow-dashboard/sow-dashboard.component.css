@@ -1,6 +1,5 @@
 @import "../app.component.css";
 
-
 .grid-record-count-text{
     font-weight: bold;
 }
@@ -19,15 +18,15 @@ margin-right: 10px;
 /*floating button for adding record */
 ._btn-float-add{
   position: absolute;
-  bottom: 100px;
-  left: 1000px;
+  bottom: 10%;
+  right: 10%;
 }
 
 /*floating button for saving record */
 ._btn-float-save{
   position: absolute;
-  bottom: 100px;
-  left: 1055px;
+  bottom: 10%;
+  right: 5.5%;
 }
 
 ._btn-round-floating-icon-style{
@@ -47,3 +46,15 @@ margin-right: 10px;
 .icon-upload{
     margin-right: 10px;
 }
+
+.ag-theme-alpine.ag-header {
+  background-color: #1184ff;
+  background-color: #1184ff;
+  background-color: #000;
+  background-color: var(--ag-foreground-color, #000);
+  color: #fff;
+  color: var(--ag-background-color, #1184ff);
+  border-bottom: solid 1px #babfc7;
+}
+
+.ag-theme-alpine.ag-header-cell {padding-left: 18px;padding-right: 18px; background-color: #e2f1fd;background-color: #e2f1fd;}

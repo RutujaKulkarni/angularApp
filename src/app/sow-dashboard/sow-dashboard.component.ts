@@ -5,7 +5,7 @@ import { HttpHeaders } from '@angular/common/http';
 @Component({
   selector: 'app-sow-dashboard',
   templateUrl: './sow-dashboard.component.html',
-  styleUrls: ['./sow-dashboard.component.css']
+  styleUrls: ['./sow-dashboard.component.css', './sow.scss']
 })
 
 export class SowDashboardComponent {
@@ -20,6 +20,7 @@ export class SowDashboardComponent {
   private defaultColDef;
   private newRow: boolean = false;
   private paginationPageSize;
+  // private getRowHeight;
 
   constructor(private http: HttpClient) {
 
@@ -39,58 +40,62 @@ export class SowDashboardComponent {
 
     this.saveData = false;
     this.columnDefs = [
-      { headerName: `SOW ID`, field: `sowContractId`, sortable: true, width:150, pinned: 'left', sort: { direction: 'desc' } },
-      { headerName: `SOW ID PK`, field: `sowId`, sortable: true, hide:true },
-      { headerName: `Contract Name`, field: `contractName`, sortable: true,editable: true, width:190 },
-      { headerName: `Contract Pred ID`, field: `sowContractPredId`, sortable: true, editable: true,width:190 },
-      { headerName: `Signed Effective Date`, field: `signedEffectiveDate`, sortable: true, valueParser:this.dateValueSetter, editable: true,width:140 }, //date
-      { headerName: `SOW start Date`, field: `sowStartDate`, sortable: true, valueParser:this.dateValueSetter, editable: true, width:140 }, //date
-      { headerName: `SOW end Date`, field: `sowEndDate`, sortable: true, valueParser:this.dateValueSetter, editable: true, width:140 }, //date
-      { headerName: `Tenure`, field: `tenure`, sortable: true, valueParser: this.numericValueSetter, editable: true, width:80 }, //int
-      { headerName: `FG ID`, field: `fgId`, sortable: true, editable: true, width:150 }, //string
-      { headerName: `Source Data`, field: `sourceData`, sortable: true , editable: true},
-      { headerName: `Status`, field: `status`, sortable: true, editable: true, width:110 },
-      { headerName: `Citi Legal Entity Seq`, field: `auroraCitiLegalEntitySeqFk`, sortable: true, hide:true }, //hide
-      { headerName: `Geography`, field: `geography`, sortable: true, editable: true },
-      { headerName: `Service Type Seq`, field: `auroraServiceTypeSeqFk`, sortable: true, hide:true }, //hide
-      { headerName: `Sector Type Seq`, field: `auroraSectorTypeSeqFk`, sortable: true, hide:true }, //hide
-      { headerName: `Area`, field: `area`, sortable: true,editable: true },
-      { headerName: `Business Unit Seq`, field: `auroraBusinessUnitSeqFk`, sortable: true, hide:true }, //hide
-      { headerName: `Citi SOW Owner Name`, field: `citiSowOwnerName`, sortable: true, editable: true, width:180 },
-      { headerName: `Citi SOW Owner Email Id`, field: `citiSowOwnerEmailId`, sortable: true, editable: true, valueSetter: this.emailValueSetter,width:190 },
-      { headerName: `Citi Project Manager`, field: `citiPM`, sortable: true, editable: true, width:180 },
-      { headerName: `Citi Project Manager Email Id`, field: `citiPMEmailId`, sortable: true, editable: true, valueSetter: this.emailValueSetter, width:190 },
-      { headerName: `Virtusa PM Name`, field: `virtusaPMName`, sortable: true, editable: true, width:190 },
-      { headerName: `Virtusa PM EmailId`, field: `virtusaPMEmailId`, sortable: true, editable: true, valueSetter: this.emailValueSetter,width:190 },
-      { headerName: `Auto Email Triggered Flag`, field: `autoEmailTriggeredFlag`, sortable: true, editable: true },
-      { headerName: `Auto Email Triggered Date`, field: `autoEmailTriggeredDate`, sortable: true, valueParser:this.dateValueSetter, editable: true}, //date
-      { headerName: `Key Personnel SOW Count`, field: `keyPersonnelSOWCount`, sortable: true, valueParser: this.numericValueSetter, editable: true }, //int
-      { headerName: `Cob Applicability`, field: `cobApplicability`, sortable: true,editable: true },
-      { headerName: `Remarks`, field: `remarks`, sortable: true, editable: true },
-      { headerName: `Created Date`, field: `createdDate`, sortable: true, valueParser:this.dateValueSetter,editable: true },//date
-      { headerName: `Created By`, field: `createdBy`, sortable: true, editable: true }, //editable because we do not have entitlements in place
-      { headerName: `Modified Date`, field: `modifiedDate`, sortable: true, valueParser:this.dateValueSetter,editable: true }, //date
-      { headerName: `Modified By`, field: `modifiedBy`, sortable: true, editable: true },
+      { headerName: `SOW ID`, field: `sowContractId`, sortable: true, width:150, pinned: 'left', sort: { direction: 'desc' } ,cellRenderer:this.getSowIdCellRenderer},
+      { headerName: `SOW ID PK`, field: `sowId`, sortable: true, hide:true,cellRenderer:this.getCellRenderer },
+      { headerName: `Contract Name`, field: `contractName`, sortable: true,editable: true, width:85 ,cellRenderer:this.getCellRenderer},
+      { headerName: `Contract Pred ID`, field: `sowContractPredId`, sortable: true, editable: true,width:95,cellRenderer:this.getCellRenderer },
+      { headerName: `Signed Effective Date`, field: `signedEffectiveDate`, sortable: true, valueParser:this.dateValueSetter, editable: true,width:70,cellRenderer:this.getCellRenderer}, //date
+      { headerName: `SOW start Date`, field: `sowStartDate`, sortable: true, valueParser:this.dateValueSetter, editable: true, width:70 ,cellRenderer:this.getCellRenderer}, //date
+      { headerName: `SOW end Date`, field: `sowEndDate`, sortable: true, valueParser:this.dateValueSetter, editable: true, width:70,cellRenderer:this.getCellRenderer }, //date
+      { headerName: `Tenure`, field: `tenure`, sortable: true, valueParser: this.numericValueSetter, editable: true, width:80 ,cellRenderer:this.getCellRenderer}, //int
+      { headerName: `FG ID`, field: `fgId`, sortable: true, editable: true, width:75 ,cellRenderer:this.getCellRenderer}, //string
+      { headerName: `Source Data`, field: `sourceData`, sortable: true , editable: true,cellRenderer:this.getCellRenderer, width:80},
+      { headerName: `Status`, field: `status`, sortable: true, editable: true, width:55,cellRenderer:this.getCellRenderer },
+      { headerName: `Citi Legal Entity Seq`, field: `auroraCitiLegalEntitySeqFk`, sortable: true, hide:true,cellRenderer:this.getCellRenderer , width:80}, //hide
+      { headerName: `Geography`, field: `geography`, sortable: true, editable: true ,cellRenderer:this.getCellRenderer, width:80},
+      { headerName: `Service Type Seq`, field: `auroraServiceTypeSeqFk`, sortable: true, hide:true ,cellRenderer:this.getCellRenderer, width:80}, //hide
+      { headerName: `Sector Type Seq`, field: `auroraSectorTypeSeqFk`, sortable: true, hide:true ,cellRenderer:this.getCellRenderer, width:80}, //hide
+      { headerName: `Area`, field: `area`, sortable: true,editable: true ,cellRenderer:this.getCellRenderer, width:80},
+      { headerName: `Business Unit Seq`, field: `auroraBusinessUnitSeqFk`, sortable: true, hide:true,cellRenderer:this.getCellRenderer, width:80 }, //hide
+      { headerName: `Citi SOW Owner Name`, field: `citiSowOwnerName`, sortable: true, editable: true, width:90,cellRenderer:this.getCellRenderer },
+      { headerName: `Citi SOW Owner Email Id`, field: `citiSowOwnerEmailId`, sortable: true, editable: true, valueSetter: this.emailValueSetter,width:85 ,cellRenderer:this.getCellRenderer},
+      { headerName: `Citi Project Manager`, field: `citiPM`, sortable: true, editable: true, width:90,cellRenderer:this.getCellRenderer },
+      { headerName: `Citi Project Manager Email Id`, field: `citiPMEmailId`, sortable: true, editable: true, valueSetter: this.emailValueSetter, width:85,cellRenderer:this.getCellRenderer },
+      { headerName: `Virtusa PM Name`, field: `virtusaPMName`, sortable: true, editable: true, width:95,cellRenderer:this.getCellRenderer},
+      { headerName: `Virtusa PM EmailId`, field: `virtusaPMEmailId`, sortable: true, editable: true, valueSetter: this.emailValueSetter,width:95,cellRenderer:this.getCellRenderer },
+      { headerName: `Auto Email Triggered Flag`, field: `autoEmailTriggeredFlag`, sortable: true, editable: true,cellRenderer:this.getCellRenderer , width:80},
+      { headerName: `Auto Email Triggered Date`, field: `autoEmailTriggeredDate`, sortable: true, valueParser:this.dateValueSetter, editable: true,cellRenderer:this.getCellRenderer, width:80}, //date
+      { headerName: `Key Personnel SOW Count`, field: `keyPersonnelSOWCount`, sortable: true, valueParser: this.numericValueSetter, editable: true ,cellRenderer:this.getCellRenderer, width:80}, //int
+      { headerName: `Cob Applicability`, field: `cobApplicability`, sortable: true,editable: true ,cellRenderer:this.getCellRenderer, width:80},
+      { headerName: `Remarks`, field: `remarks`, sortable: true, editable: true ,cellRenderer:this.getCellRenderer, width:80},
+      { headerName: `Created Date`, field: `createdDate`, sortable: true, valueParser:this.dateValueSetter,editable: true ,cellRenderer:this.getCellRenderer, width:80},//date
+      { headerName: `Created By`, field: `createdBy`, sortable: true, editable: true ,cellRenderer:this.getCellRenderer, width:80}, //editable because we do not have entitlements in place
+      { headerName: `Modified Date`, field: `modifiedDate`, sortable: true, valueParser:this.dateValueSetter,editable: true,cellRenderer:this.getCellRenderer , width:80}, //date
+      { headerName: `Modified By`, field: `modifiedBy`, sortable: true, editable: true ,cellRenderer:this.getCellRenderer, width:80},
     ];
     this.editType = 'fullRow';
   }
 
-  headerHeightSetter() {
-    //var padding = 20;
-    //var height = this.headerHeightGetter() + padding;
-    this.gridApi.setHeaderHeight(48);
-    this.gridApi.resetRowHeights();
+  private getCellRenderer(params){
+    return '<span style="top:356px; left:530px; width:46px; height:17px; text-align:left; font-family: sans-serif; display: block; font-size:12px; letter-spacing:0px; color:#5A5C5D; opacity:1; ">'+params.value+'</span>'
   }
 
-  headerHeightGetter() {
-    var columnHeaderTexts = document.querySelectorAll('.ag-header-cell-text');
-    var columnHeaderTextsArray = [];
-    columnHeaderTexts.forEach(node => columnHeaderTextsArray.push(node));
-    var clientHeights = columnHeaderTextsArray.map(
-      headerText => headerText.clientHeight
-    );
-    var tallestHeaderTextHeight = Math.max(...clientHeights);
-    return tallestHeaderTextHeight;
+  private getSowIdCellRenderer(params){
+    return '<span style="top:356px; left:140px; width:120px; height:17px; text-align:left; font-family: sans-serif; font-size:12px; font-weight: bold; letter-spacing: 0px;color: #5A5C5D; opacity: 1;">'+params.value+'</span>'
+  }
+
+  private getRowHeight (params) {
+    console.log("in getrowheight");
+    console.log(params);
+    // if (params.node.level === 0) {
+    //   return 50;
+    // }else{
+    //   return 30;
+    // }
+    // if (params.node.level === 1) {
+    //   return 60;
+    // }
+    return 40;
   }
 
   OnAddRow(){
@@ -115,6 +120,8 @@ export class SowDashboardComponent {
     this.columnApi = params.columnApi;
     this.fetchData();
     this.autoSizeAll(true);
+    console.log("On Grid ready");
+    console.log(params);
   }
 
   fetchData(){
